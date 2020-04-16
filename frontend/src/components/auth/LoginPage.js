@@ -23,11 +23,11 @@ class LoginPage extends Component {
             <div className="wrapper">
                 <div className="container">
                     <div className="row mt-4">
-                        <div className="col-md-6 " style={{color: "white"}}>
-                            <h1>SDA</h1>
-                            <p>Starter template</p>
+                        <div className="col-md-6 " style={{color: "white"}}> 
+                            <div className="card-body">
+                             <h4 className="card-title"> Welcom to the Online Programming Discussion Forum </h4>
+                            </div>
                         </div>
-
                         <div className="col-md-6">
                             <div className="row">
                                 <div className="col-12  strong-shadow">
