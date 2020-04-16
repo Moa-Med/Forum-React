@@ -6,42 +6,40 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
-
 /*
     @TODO AutoWire PostService and create the methods needed to implement the API.
     Don't forget to add necessary annotations.
  */
 
 @RestController
+@RequestMapping("/posts")
 public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/posts")
+    @GetMapping("")
     public List<Post> getAll() {
         return postService.getAll();
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/{id}")
     public Post getById(@PathVariable Long id) {
         return postService.getByID(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/posts")
+    @PostMapping("")
     public Post save(@RequestBody Post newPost) {
         return postService.save(newPost);
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         postService.deleteById(id);
     }
 
-    @PutMapping("/posts/{id}") //not sure about this implementation on Service side, maybe it needs to be also by id
+    @PutMapping("")
     public Post update(@PathVariable Post updatedPost) {
-        return postService.update(updatedPost)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return postService.update(updatedPost);
     }
 }
