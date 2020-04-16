@@ -1,6 +1,11 @@
 package se.kth.sda.skeleton.posts;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 // @TODO add Hibernate annotations to define which table and columns should be used to save the Post Object.
+@Entity
+@Table(name = "post ")
 public class Post {
     private Long id;
 
