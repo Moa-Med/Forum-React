@@ -34,12 +34,12 @@ public class PostController {
         return postService.save(newPost);
     }
 
-    @DeleteMapping("/tasks/{id}")
+    @DeleteMapping("/posts/{id}")
     public void delete(@PathVariable Long id) {
         postService.deleteById(id);
     }
 
-    @PutMapping("/tasks/{id}") //not sure about this implementation on Service side, maybe it needs to be also by id
+    @PutMapping("/posts/{id}") //not sure about this implementation on Service side, maybe it needs to be also by id
     public Post update(@PathVariable Post updatedPost) {
         return postService.update(updatedPost)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
