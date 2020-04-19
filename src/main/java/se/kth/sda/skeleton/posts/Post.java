@@ -1,6 +1,10 @@
 package se.kth.sda.skeleton.posts;
 
+import se.kth.sda.skeleton.comments.Comment;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // @TODO add Hibernate annotations to define which table and columns should be used to save the Post Object.
 @Entity
@@ -14,8 +18,8 @@ public class Post {
     @Column(name = "body")
     private String body;
 
-//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     public Post() {
     }
