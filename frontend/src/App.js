@@ -16,6 +16,7 @@ import LoginPage from "./components/auth/LoginPage";
 import HomePage from './components/home/HomePage';
 import PostsPage from "./components/posts/PostsPage";
 import ChatPage from './components/chat/ChatPage';
+import CommentsPage from './components/comments/CommentsPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
@@ -26,7 +27,8 @@ function App() {
                 <Navbar onLogout={() => Auth.logout()} />
 
                 <div className="container mt-5">
-                    <Switch>
+                    <Switch> 
+                        <Route path='/posts/:id' component={CommentsPage} />
                         <Route path="/posts">
                             <PostsPage/>
                         </Route>
