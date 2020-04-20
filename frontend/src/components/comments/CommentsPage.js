@@ -35,7 +35,7 @@ class CommentsPage extends React.Component {
         console.log('comment id '+comment.id);
         try {
             await CommentsApi.deleteComment(comment.id);
-            const newComments = this.state.posts.filter(c => c.id !== comment.id);
+            const newComments = this.state.comments.filter(c => c.id !== comment.id);
             this.setState({
                 comments: newComments,
             });

@@ -31,11 +31,9 @@ public class CommentController {
     }
 
     @DeleteMapping("posts/comments/{id}")
-<<<<<<< HEAD
     public void deleteComment(@PathVariable Long id) {
-=======
+
     public void deleteComment(@PathVariable("id") Long id) {
->>>>>>> Frontend/Post-Comment-01
        commentService.deleteById(id);
     }
 

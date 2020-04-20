@@ -16,11 +16,8 @@ import LoginPage from "./components/auth/LoginPage";
 import HomePage from './components/home/HomePage';
 import PostsPage from "./components/posts/PostsPage";
 import ChatPage from './components/chat/ChatPage';
-<<<<<<< HEAD
-import CommentsPage from './components/comments/CommentsPage';
-=======
 import CommentsPage from './components/comments/CommentsPage'
->>>>>>> Frontend/Post-Comment-01
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
