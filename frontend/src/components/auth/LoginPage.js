@@ -20,12 +20,13 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div className="wrapper-login">
                 <div className="container">
                     <div className="row mt-4">
-                        <div className="col-md-6 " style={{color: "white"}}> 
-                            <div className="card-body">
-                             <h4 className="card-title"> Welcom to the Online Programming Discussion Forum </h4>
+                        <div className="col-md-6"> 
+                            <div className="card-body-login">
+                             <p><img src={require(`../../assets/logo.png`)} width={254} height={254} alt='Logo' /></p>
+                             <p className="p-login">WELCOME <br/>to the Online Programming Discussion Forum</p>
                             </div>
                         </div>
                         <div className="col-md-6">

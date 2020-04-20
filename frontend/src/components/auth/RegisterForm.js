@@ -7,7 +7,7 @@ function RegisterForm({onSubmit}) {
 
     return (
         <div className="card">
-            <div className="card-body">
+            <div className="form-body">
                 <h4 className="card-title">Sign up</h4>
                 <div>
                     <div className="form-group">
