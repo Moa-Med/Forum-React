@@ -22,6 +22,7 @@ public class Post {
     private List<Comment> comments = new ArrayList<>();
 
     public Post() {
+
     }
 
     public Post(String body) {
