@@ -17,6 +17,7 @@ public class Comment {
     private Post post;
 
     public Comment() {
+
     }
 
     public Comment(Long id, String body, Post post) {
