@@ -22,7 +22,6 @@ function CommentForm({onSubmit}) {
                         onChange={e => setBody(e.target.value)} />
                 </div>
 
-
                 <div className="form-group">
                     <button 
                         className="btn btn-primary" 

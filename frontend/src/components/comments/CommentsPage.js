@@ -1,6 +1,6 @@
 import React from "react";
 import CommentsApi from "../../api/CommentsApi";
-import PostsApi from "./../../api/PostsApi";
+import PostsApi from "../../api/PostsApi";
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentForm";
 
@@ -31,6 +31,8 @@ class CommentsPage extends React.Component {
     }
 
     async deleteComment(comment) {
+        console.log('comment object '+comment);
+        console.log('comment id '+comment.id);
         try {
             await CommentsApi.deleteComment(comment.id);
             const newComments = this.state.posts.filter(c => c.id !== comment.id);
@@ -44,44 +46,45 @@ class CommentsPage extends React.Component {
 
     componentDidMount() {
 
-        PostsApi.getAllPosts()
+        const idPost = Number(this.props.match.params.id);
+
+        
+         PostsApi.getAllPosts()
         .then(({data}) => this.setState({posts: data}))
         .catch(err => console.error(err));
 
-       // this.setState({postId : this.props.postView[0].id });
+        this.setState({postId : idPost });
 
-    //    CommentsApi.getAllCommentsByPost()
-   //         .then(({data}) => this.setState({comments: data}))
-    //        .catch(err => console.error(err));
+       console.log('value from backend'+CommentsApi.getAllCommentsByPost(idPost)
+            .then(({data}) => this.setState({comments: data}))
+            .catch(err => console.error(err)))
     }
 
     render() {
+        console.log('idpost in the comp'+this.state.postId);
       const comments = this.state.comments;
+    
       const id = Number(this.props.match.params.id);
       let postBody = '';
       this.state.posts.map(post => { if(post.id === id){
-          postBody = post.body
-        }
-      });
+        postBody = post.body
+        }  });
       
         return (
             <div>
                 <div className="card mt-3">
                      <div className="card-body">
                         <h5>Post number : {id}</h5>  
-                        <p> {postBody} </p>
+                        <h3>{postBody}</h3>
                      </div>
                  </div>
-                 <br/>
-            <CommentForm onSubmit={(commentData) => this.createComment(commentData , id)}/>
+             <br/>
+             <CommentForm onSubmit={(commentData) => this.createComment(commentData , id)}/>
 
-              { /** 
-                <CommentForm onSubmit={(commentData) => this.createComment(commentData , id)}/>
-
-                {comments.map(comment => 
-                <CommentCard key={comments.id} comment={comment} onDeleteClick={() => this.deleteComment(comment.id)}/>
+             {comments.map(comment => 
+                <CommentCard key={comment.id} comment={comment} onDeleteClick={() => this.deleteComment(comment)}/>
                 )}
-                */}
+
             </div>
         );
     }
