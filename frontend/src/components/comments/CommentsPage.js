@@ -55,20 +55,22 @@ class CommentsPage extends React.Component {
 
         this.setState({postId : idPost });
 
-       console.log('value from backend'+CommentsApi.getAllCommentsByPost(idPost)
+       CommentsApi.getAllCommentsByPost(idPost)
             .then(({data}) => this.setState({comments: data}))
-            .catch(err => console.error(err)))
+            .catch(err => console.error(err));
     }
 
     render() {
-        console.log('idpost in the comp'+this.state.postId);
       const comments = this.state.comments;
-    
+
+      console.log('comment value '+comments);
+
       const id = Number(this.props.match.params.id);
       let postBody = '';
       this.state.posts.map(post => { if(post.id === id){
         postBody = post.body
-        }  });
+        } 
+    });
       
         return (
             <div>
@@ -82,6 +84,7 @@ class CommentsPage extends React.Component {
              <CommentForm onSubmit={(commentData) => this.createComment(commentData , id)}/>
 
              {comments.map(comment => 
+                
                 <CommentCard key={comment.id} comment={comment} onDeleteClick={() => this.deleteComment(comment)}/>
                 )}
 

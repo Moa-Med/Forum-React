@@ -28,7 +28,6 @@ public class CommentController {
        return commentService.getById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Could not find post with id " + id.toString()));
-
     }
 
     @DeleteMapping("posts/comments/{id}")
