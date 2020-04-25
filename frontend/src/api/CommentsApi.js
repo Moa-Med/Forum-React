@@ -1,6 +1,9 @@
 import Api from "./Api";
 
 class CommentsApi {
+    getEmail(){
+        return Api.get('/posts/comment/email');
+    }
 
     getAllCommentsByPost(postId) {
         return Api.get('posts/'+postId+'/comments');
@@ -10,8 +13,8 @@ class CommentsApi {
         return Api.get('posts/'+postId+'/comments/'+id);
     }
 
-    createComment(comment , postId) {
-        return Api.post('posts/'+postId+'/comments', comment);
+    createComment(comment , postId ,email) {
+        return Api.post('posts/'+postId+'/comments/'+email, comment);
     }
 
     updateComment(id) {

@@ -4,7 +4,6 @@ import PostsApi from "../../api/PostsApi";
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentForm";
 
-
 class CommentsPage extends React.Component {
     constructor(props) {
         super(props);
@@ -17,9 +16,9 @@ class CommentsPage extends React.Component {
         };
     }
 
-    async createComment(commentData , postId) {
+    async createComment(commentData , postId ,email) {
         try {
-            const response = await CommentsApi.createComment(commentData , postId);
+            const response = await CommentsApi.createComment(commentData , postId ,email);
             const comment = response.data;
             const newComments = this.state.comments.concat(comment);
 
@@ -47,9 +46,12 @@ class CommentsPage extends React.Component {
 
         const idPost = Number(this.props.match.params.id);
 
-        
          PostsApi.getAllPosts()
         .then(({data}) => this.setState({posts: data}))
+        .catch(err => console.error(err));
+
+        CommentsApi.getEmail()
+        .then(({data}) => this.setState({email : data}))
         .catch(err => console.error(err));
 
         this.setState({postId : idPost });
@@ -61,13 +63,13 @@ class CommentsPage extends React.Component {
 
     render() {
       const comments = this.state.comments;
-
+      const email = this.state.email;
       const id = Number(this.props.match.params.id);
       let posts = [];
-      let email = '';
+      let postEmail = '';
       this.state.posts.map(post => { if(post.id === id){
         posts = post;
-        email = post.user.email;
+        postEmail = post.user.email;
         } return null;
     });
         return (
@@ -76,16 +78,16 @@ class CommentsPage extends React.Component {
                      <div className="card-body">
                         <h3>{posts.body}</h3>
                         <p>
-                        From : <u>{email}</u>
+                        From : <u>{postEmail}</u>
                         </p>
                      </div>
                  </div>
              <br/>
-             <CommentForm onSubmit={(commentData) => this.createComment(commentData , id)}/>
+             <CommentForm onSubmit={(commentData) => this.createComment(commentData , id,email)}/>
 
              {comments.map(comment => 
                 
-                <CommentCard key={comment.id} comment={comment} onDeleteClick={() => this.deleteComment(comment)}/>
+                <CommentCard key={comment.id} commentEmail={comment.user.email} comment={comment} onDeleteClick={() => this.deleteComment(comment)}/>
                 )}
 
             </div>
