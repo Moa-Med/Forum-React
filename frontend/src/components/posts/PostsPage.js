@@ -49,14 +49,14 @@ class PostsPage extends React.Component {
 
     render() {
         const posts = this.state.posts;
-        const email = this.state.email;
+        const currentEmail = this.state.email;
 
         return (
             <div>
-                <PostForm onSubmit={(postData) => this.createPost(postData,email)}/>
+                <PostForm onSubmit={(postData) => this.createPost(postData,currentEmail)}/>
 
                 {posts.map(post => 
-                    <PostCard key={post.id} post={post} onDeleteClick={() => this.deletePost(post)}/>
+                    <PostCard key={post.id} currentEmail={currentEmail} post={post} onDeleteClick={() => this.deletePost(post)}/>
                 )}
             </div>
         );

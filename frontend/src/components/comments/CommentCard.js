@@ -1,6 +1,6 @@
 import React from "react";
 
-function CommentCard({comment, onDeleteClick ,commentEmail}) {
+function CommentCard({comment, onDeleteClick ,currentEmail}) {
     return (
         <div className="card mt-3">
             <div className="card-body">
@@ -8,10 +8,12 @@ function CommentCard({comment, onDeleteClick ,commentEmail}) {
                     {comment.body}
                 </p>
                 <p>
-                 From : <u>{commentEmail}</u>
+                 From : <u>{comment.user.email}</u>
                 </p>
-
-                <button className="btn btn-danger" onClick={onDeleteClick}>Delete</button>
+                {(comment.user.email === currentEmail) ? 
+                <button className="btn btn-danger" onClick={onDeleteClick}>Delete</button> : null
+                }
+                
             </div>
         </div>
     );

@@ -50,15 +50,6 @@ public class CommentController {
         commentService.deleteById(id);
     }
 
-
-    /*@PostMapping("posts/{postId}/comments")
-    public Comment postComment(@RequestBody Comment comment, @PathVariable Long postId) {
-        Post post = postService.getByID(postId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find post with id " + postId.toString()));
-        comment.setPost(post);
-        return commentService.create(comment);
-    }*/
-
     @PostMapping("posts/{postId}/comments/{email}")
     public Comment postComment(@RequestBody Comment comment, @PathVariable Long postId, @PathVariable String email) {
         Post post = postService.getByID(postId)

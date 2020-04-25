@@ -63,7 +63,7 @@ class CommentsPage extends React.Component {
 
     render() {
       const comments = this.state.comments;
-      const email = this.state.email;
+      const currentEmail = this.state.email;
       const id = Number(this.props.match.params.id);
       let posts = [];
       let postEmail = '';
@@ -83,11 +83,10 @@ class CommentsPage extends React.Component {
                      </div>
                  </div>
              <br/>
-             <CommentForm onSubmit={(commentData) => this.createComment(commentData , id,email)}/>
+             <CommentForm onSubmit={(commentData) => this.createComment(commentData , id, currentEmail)}/>
 
              {comments.map(comment => 
-                
-                <CommentCard key={comment.id} commentEmail={comment.user.email} comment={comment} onDeleteClick={() => this.deleteComment(comment)}/>
+                <CommentCard key={comment.id} currentEmail={currentEmail} comment={comment} onDeleteClick={() => this.deleteComment(comment)}/>
                 )}
 
             </div>
