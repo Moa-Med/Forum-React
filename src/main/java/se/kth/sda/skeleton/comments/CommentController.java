@@ -32,9 +32,7 @@ public class CommentController {
 
     @DeleteMapping("posts/comments/{id}")
     public void deleteComment(@PathVariable Long id) {
-
-    public void deleteComment(@PathVariable("id") Long id) {
-       commentService.deleteById(id);
+        commentService.deleteById(id);
     }
 
     @PostMapping("posts/{postId}/comments")

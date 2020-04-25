@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import se.kth.sda.skeleton.auth.AuthService;
+import se.kth.sda.skeleton.user.User;
+import se.kth.sda.skeleton.user.UserService;
 
 import java.util.List;
 /*
@@ -17,9 +20,20 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private AuthService authService;
+
     @GetMapping("")
     public List<Post> getAll() {
         return postService.getAll();
+    }
+
+    @GetMapping("/email")
+    public String getEmail(){
+        return authService.getLoggedInUserEmail();
     }
 
     @GetMapping("/{id}")
@@ -28,9 +42,11 @@ public class PostController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("")
-    public Post save(@RequestBody Post newPost) {
-        return postService.save(newPost);
+    @PostMapping("/{email}")
+    public Post savePost(@RequestBody Post newPost ,@PathVariable String email) {
+            User user = userService.findUserByEmail(email);
+            newPost.setUser(user);
+            return postService.save(newPost);
     }
 
     @DeleteMapping("/{id}")

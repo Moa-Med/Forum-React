@@ -1,6 +1,11 @@
 import Api from "./Api";
 
 class PostsApi {
+
+    getEmail(){
+        return Api.get('/posts/email');
+    }
+
     getAllPosts() {
         return Api.get('/posts');
     }
@@ -9,7 +14,11 @@ class PostsApi {
         return Api.get('/posts/'+id);
     }
 
-    createPost(post) {
+    createPost(post , email){
+       return Api.post('/posts/'+email, post);
+    }
+
+    createPostOld(post) {
         return Api.post('/posts', post);
     }
 

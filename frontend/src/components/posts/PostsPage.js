@@ -8,16 +8,16 @@ class PostsPage extends React.Component {
         super(props);
 
         this.state = {
-            posts : []
+            posts : [],
+            email : "",
         };
     }
 
-    async createPost(postData) {
+    async createPost(postData,email) {
         try {
-            const response = await PostsApi.createPost(postData);
+            const response = await PostsApi.createPost(postData,email);
             const post = response.data;
             const newPosts = this.state.posts.concat(post);
-
             this.setState({
                 posts: newPosts,
             });
@@ -38,19 +38,22 @@ class PostsPage extends React.Component {
         }
     }
 
-
     componentDidMount() {
         PostsApi.getAllPosts()
             .then(({data}) => this.setState({posts: data}))
+            .catch(err => console.error(err));
+        PostsApi.getEmail()
+            .then(({data}) => this.setState({email : data}))
             .catch(err => console.error(err));
     }
 
     render() {
         const posts = this.state.posts;
+        const email = this.state.email;
 
         return (
             <div>
-                <PostForm onSubmit={(postData) => this.createPost(postData)}/>
+                <PostForm onSubmit={(postData) => this.createPost(postData,email)}/>
 
                 {posts.map(post => 
                     <PostCard key={post.id} post={post} onDeleteClick={() => this.deletePost(post)}/>

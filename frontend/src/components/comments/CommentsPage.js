@@ -13,6 +13,7 @@ class CommentsPage extends React.Component {
             comments : [],
             posts : [],
             postId : '',
+            email : '',
         };
     }
 
@@ -31,8 +32,6 @@ class CommentsPage extends React.Component {
     }
 
     async deleteComment(comment) {
-        console.log('comment object '+comment);
-        console.log('comment id '+comment.id);
         try {
             await CommentsApi.deleteComment(comment.id);
             const newComments = this.state.comments.filter(c => c.id !== comment.id);
@@ -63,21 +62,22 @@ class CommentsPage extends React.Component {
     render() {
       const comments = this.state.comments;
 
-      console.log('comment value '+comments);
-
       const id = Number(this.props.match.params.id);
-      let postBody = '';
+      let posts = [];
+      let email = '';
       this.state.posts.map(post => { if(post.id === id){
-        postBody = post.body
-        } 
+        posts = post;
+        email = post.user.email;
+        } return null;
     });
-      
         return (
             <div>
                 <div className="card mt-3">
                      <div className="card-body">
-                        <h5>Post number : {id}</h5>  
-                        <h3>{postBody}</h3>
+                        <h3>{posts.body}</h3>
+                        <p>
+                        From : <u>{email}</u>
+                        </p>
                      </div>
                  </div>
              <br/>

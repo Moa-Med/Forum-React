@@ -24,7 +24,7 @@ public class AuthService {
     private static final Logger logger = LoggerFactory.getLogger("AuthService");
 
     public String getLoggedInUserEmail() {
-        Object maybeUserDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        Object maybeUserDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (maybeUserDetails instanceof UserDetails) {
             return ((UserDetails) maybeUserDetails).getUsername();
         }

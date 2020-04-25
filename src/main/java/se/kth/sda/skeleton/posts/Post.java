@@ -1,6 +1,7 @@
 package se.kth.sda.skeleton.posts;
 
 import se.kth.sda.skeleton.comments.Comment;
+import se.kth.sda.skeleton.user.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,12 +22,24 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     public Post() {
 
     }
 
-    public Post(String body) {
+    public Post(String body,User user) {
+        this.user = user;
         this.body = body;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

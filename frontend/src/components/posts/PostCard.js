@@ -9,6 +9,9 @@ function PostCard({post, onDeleteClick}) {
                 <p>
                     {post.body}
                 </p>
+                <p>
+                 From : <u>{post.user.email}</u>
+                </p>
 
                 <button className="btn btn-danger" onClick={onDeleteClick}>Delete</button>
                 {' '}
